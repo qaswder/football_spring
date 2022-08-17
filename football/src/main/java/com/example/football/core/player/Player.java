@@ -51,12 +51,9 @@ public class Player {
             inverseJoinColumns = { @JoinColumn(name = "id_team") })
     private Set<Team> teams = new HashSet<>();
 
-    @NotEmpty
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinTable(name = "fc_position_player",
-            joinColumns = { @JoinColumn(name = "id_player") },
-            inverseJoinColumns = { @JoinColumn(name = "id_position") })
-    private Set<Position> positions = new HashSet<>();
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "id_position")
+    private Position position;
 
 
     public long getId() {
@@ -115,11 +112,11 @@ public class Player {
         this.teams = teams;
     }
 
-    public Set<Position> getPositions() {
-        return positions;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPositions(Set<Position> positions) {
-        this.positions = positions;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

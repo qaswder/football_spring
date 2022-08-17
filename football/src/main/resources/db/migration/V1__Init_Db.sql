@@ -101,6 +101,7 @@ CREATE TABLE fc_player (
   name VARCHAR(255),
   surname VARCHAR(255),
   weight int4,
+  id_position int8,
   PRIMARY KEY (id));
 
 
@@ -151,30 +152,6 @@ CREATE TABLE fc_tournament_result (
   id_tournament int8,
   PRIMARY KEY (id));
 
-CREATE SEQUENCE fc_position_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    MAXVALUE 2147483647
-    CACHE 1;
-
-CREATE TABLE fc_position (
-    id int8 NOT NULL DEFAULT nextval('fc_position_id_seq'),
-    position VARCHAR(255),
-    PRIMARY KEY (id));
-
-CREATE TABLE fc_position_player (
-    id_position int8 NOT NULL,
-    id_player int8 NOT NULL,
-    PRIMARY KEY (id_position, id_player));
-
-ALTER TABLE if EXISTS fc_position_player
-ADD CONSTRAINT fc_position_fk
-FOREIGN KEY (id_position) REFERENCES fc_position;
-
-ALTER TABLE if EXISTS fc_position_player
-ADD CONSTRAINT fc_player_fk
-FOREIGN KEY (id_player) REFERENCES fc_player;
 
 ALTER TABLE if EXISTS fc_tournament_team
 ADD CONSTRAINT fc_team_fk

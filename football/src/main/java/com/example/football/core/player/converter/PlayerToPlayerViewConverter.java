@@ -25,6 +25,7 @@ public class PlayerToPlayerViewConverter implements Converter<Player, PlayerView
                                        PositionToPositionViewConverter positionToPositionViewConverter) {
         this.teamToTeamViewConverter = teamToTeamViewConverter;
         this.positionToPositionViewConverter = positionToPositionViewConverter;
+
     }
 
     @Override
@@ -36,15 +37,9 @@ public class PlayerToPlayerViewConverter implements Converter<Player, PlayerView
         view.setAge(player.getAge());
         view.setHeight(player.getHeight());
         view.setWeight(player.getWeight());
-
-        Set<PositionView> positionViews = new HashSet<>();
-        Set<Position> positions= player.getPositions();
-        positions.forEach(position -> {
-            PositionView positionView = positionToPositionViewConverter.convert(position);
-            positionViews.add(positionView);
-        });
-        view.setPositions(positionViews);
-
+        Position position = player.getPosition();
+        PositionView positionView = positionToPositionViewConverter.convert(position);
+        view.setPosition(positionView);
         Set<TeamView> views = new HashSet<>();
         Set<Team> teams= player.getTeams();
         teams.forEach(team -> {

@@ -1,7 +1,6 @@
 package com.example.football.core.position;
 
-import com.example.football.base.BaseRequest;
-import com.example.football.core.player.Player;
+
 import com.example.football.core.player.PlayerRepo;
 import com.example.football.core.position.converter.PositionToPositionViewConverter;
 import com.example.football.core.position.web.PositionBaseReq;
@@ -16,16 +15,12 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 @Service
 public class PositionService {
 
     private final PositionRepo positionRepo;
     private final PositionToPositionViewConverter positionToPositionViewConverter;
-    private final PlayerRepo playerRepo;
     private final MessageUtil messageUtil;
 
     public PositionService(PositionRepo positionRepo,
@@ -34,7 +29,6 @@ public class PositionService {
                            MessageUtil messageUtil){
         this.positionRepo = positionRepo;
         this.positionToPositionViewConverter = positionToPositionViewConverter;
-        this.playerRepo = playerRepo;
         this.messageUtil = messageUtil;
     }
 

@@ -4,7 +4,6 @@ import com.example.football.base.BaseRequest;
 import com.example.football.core.player.converter.PlayerToPlayerViewConverter;
 import com.example.football.core.player.web.PlayerView;
 import com.example.football.core.player.web.PlayerBaseReq;
-import com.example.football.core.position.Position;
 import com.example.football.core.position.PositionRepo;
 import com.example.football.core.team.Team;
 import com.example.football.core.team.TeamRepo;
@@ -28,20 +27,20 @@ public class PlayerService {
 
     private final PlayerRepo playerRepo;
     private final PlayerToPlayerViewConverter playerToPlayerViewConverter;
+    private final PositionRepo positionRepo;
     private final TeamRepo teamRepo;
 
-    private final PositionRepo positionRepo;
     private final MessageUtil messageUtil;
 
     public PlayerService(PlayerRepo playerRepo,
                          PlayerToPlayerViewConverter playerToPlayerViewConverter,
-                         TeamRepo teamRepo,
                          PositionRepo positionRepo,
+                         TeamRepo teamRepo,
                          MessageUtil messageUtil) {
         this.playerRepo = playerRepo;
         this.playerToPlayerViewConverter = playerToPlayerViewConverter;
-        this.teamRepo = teamRepo;
         this.positionRepo = positionRepo;
+        this.teamRepo = teamRepo;
         this.messageUtil = messageUtil;
     }
 
@@ -93,14 +92,7 @@ public class PlayerService {
         player.setWeight(playerBaseReq.getWeight());
         player.setHeight(playerBaseReq.getHeight());
         player.setAge(playerBaseReq.getAge());
-
-        List<Position> positionList = positionRepo.findAllById(playerBaseReq.getPositions()
-                .stream()
-                .map(BaseRequest.Id::getId)
-                .collect(Collectors.toSet()));
-        Set<Position> positions = new HashSet<>(positionList);
-        player.setPositions(positions);
-
+        player.setPosition(positionRepo.getOne(playerBaseReq.getPosition()));
         List<Team> teamList = teamRepo.findAllById(playerBaseReq.getTeams()
                 .stream()
                 .map(BaseRequest.Id::getId)

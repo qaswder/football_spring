@@ -4,6 +4,7 @@ import com.example.football.base.BaseRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class PlayerBaseReq extends BaseRequest {
@@ -20,11 +21,10 @@ public class PlayerBaseReq extends BaseRequest {
 
     private int age;
 
+    @NotNull
+    private Long position;
     @NotEmpty
     private List<@Valid Id> teams;
-
-    @NotEmpty
-    private List<@Valid Id> positions;
 
 
     public String getSurname() {
@@ -67,6 +67,14 @@ public class PlayerBaseReq extends BaseRequest {
         this.age = age;
     }
 
+    public Long getPosition() {
+        return position;
+    }
+
+    public void setPosition(Long position) {
+        this.position = position;
+    }
+
     public List<Id> getTeams() {
         return teams;
     }
@@ -75,11 +83,4 @@ public class PlayerBaseReq extends BaseRequest {
         this.teams = teams;
     }
 
-    public List<Id> getPositions() {
-        return positions;
-    }
-
-    public void setPositions(List<Id> positions) {
-        this.positions = positions;
-    }
 }

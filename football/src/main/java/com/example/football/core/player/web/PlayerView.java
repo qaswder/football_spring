@@ -20,9 +20,8 @@ public class PlayerView {
 
     private int age;
 
+    private PositionView position;
     private Set<TeamView> teams = new HashSet<>();
-
-    private Set<PositionView> positions = new HashSet<>();
 
 
     public long getId() {
@@ -73,6 +72,14 @@ public class PlayerView {
         this.age = age;
     }
 
+    public PositionView getPosition() {
+        return position;
+    }
+
+    public void setPosition(PositionView position) {
+        this.position = position;
+    }
+
     public Set<TeamView> getTeams() {
         return teams;
     }
@@ -81,11 +88,5 @@ public class PlayerView {
         this.teams = teams;
     }
 
-    public Set<PositionView> getPositions() {
-        return positions;
-    }
 
-    public void setPositions(Set<PositionView> positions) {
-        this.positions = positions;
-    }
 }
