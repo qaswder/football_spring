@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Set;
-
+@StadiumValidation
 @Entity
 @Table(name = "fc_stadium")
 public class Stadium{
@@ -29,13 +29,13 @@ public class Stadium{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fc_stadium_id_seq")
     private long id;
 
+
     @Column(name = "name")
     private String name;
 
     @Column(name = "capacity")
     private int capacity;
     @NotEmpty
-    @StadiumValidation
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name = "fc_match_stadium",
             joinColumns = { @JoinColumn(name = "id_stadium") },

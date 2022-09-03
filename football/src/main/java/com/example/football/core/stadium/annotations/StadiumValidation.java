@@ -6,10 +6,10 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = StadiumValidator.class)
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface StadiumValidation {
-    String message() default "{Stadium}";
+    String message() default "{StadiumValid = error }";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

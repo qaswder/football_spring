@@ -4,12 +4,13 @@ import com.example.football.base.BaseRequest;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class StadiumBaseReq extends BaseRequest {
     @NotEmpty
     private String name;
-    @NotEmpty
+    @NotNull
     private int capacity;
     private List<@Valid Id> tournaments;
 
