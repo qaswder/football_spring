@@ -62,9 +62,9 @@ VALUES
     (2,2),
     (1,3);
 
-INSERT INTO fc_tournament_result (id_team, id_tournament, place, points, wins,
-                                  loses, draw, goals_missed, goals, missed)
+INSERT INTO fc_tournament_result ( place, points, wins,
+                                  loses, draw, goals_missed, goals, missed,id_team, id_tournament)
 VALUES
-    (1,1,1,9,3,0,0,15,18,3),
-    (2,1,2,4,1,0,0,-15,3,18),
-    (2,2,2,4,1,0,0,-15,3,18);
+    (1,9,3,0,0,15,18,3,1,1),
+    (2,4,1,0,0,-15,3,18,2,1),
+    (2,4,1,0,0,-15,3,18,2,2);

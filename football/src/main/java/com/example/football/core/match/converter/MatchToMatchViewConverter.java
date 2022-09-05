@@ -2,6 +2,8 @@ package com.example.football.core.match.converter;
 
 import com.example.football.core.match.Match;
 import com.example.football.core.match.web.MatchView;
+import com.example.football.core.stadium.Stadium;
+import com.example.football.core.stadium.converter.StadiumToStadiumViewConverter;
 import com.example.football.core.team.Team;
 import com.example.football.core.team.converter.TeamToTeamViewConverter;
 import com.example.football.core.tournament.Tournament;
@@ -15,11 +17,14 @@ public class MatchToMatchViewConverter implements Converter<Match, MatchView> {
 
     private final TeamToTeamViewConverter teamToTeamViewConverter;
     private final TournamentToTournamentViewConverter tournamentToTournamentViewConverter;
+    private final StadiumToStadiumViewConverter stadiumToStadiumViewConverter;
 
     public MatchToMatchViewConverter(TeamToTeamViewConverter teamToTeamViewConverter,
-                                     TournamentToTournamentViewConverter tournamentToTournamentViewConverter) {
+                                     TournamentToTournamentViewConverter tournamentToTournamentViewConverter,
+                                     StadiumToStadiumViewConverter stadiumToStadiumViewConverter) {
         this.teamToTeamViewConverter = teamToTeamViewConverter;
         this.tournamentToTournamentViewConverter = tournamentToTournamentViewConverter;
+        this.stadiumToStadiumViewConverter = stadiumToStadiumViewConverter;
     }
 
     @Override
@@ -35,6 +40,8 @@ public class MatchToMatchViewConverter implements Converter<Match, MatchView> {
         view.setTeamOwner(teamToTeamViewConverter.convert(owner));
         Tournament tournament = match.getTournament();
         view.setTournament(tournamentToTournamentViewConverter.convert(tournament));
+        Stadium stadium = match.getStadium();;
+        view.setStadium(stadiumToStadiumViewConverter.convert(stadium));
         return view;
     }
 }

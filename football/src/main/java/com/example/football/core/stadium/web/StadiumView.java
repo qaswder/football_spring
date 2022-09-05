@@ -12,7 +12,6 @@ public class StadiumView implements Serializable {
     private String name;
     private int capacity;
     private Set<TournamentView> tournaments;
-    private Set<MatchView> match;
 
     public long getId() {
         return id;
@@ -46,11 +45,5 @@ public class StadiumView implements Serializable {
         this.tournaments = tournaments;
     }
 
-    public Set<MatchView> getMatch() {
-        return match;
-    }
 
-    public void setMatch(Set<MatchView> match) {
-        this.match = match;
-    }
 }

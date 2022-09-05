@@ -1,6 +1,7 @@
 package com.example.football.core.match.web;
 
 
+import com.example.football.core.stadium.web.StadiumView;
 import com.example.football.core.team.web.TeamView;
 import com.example.football.core.tournament.web.TournamentView;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -24,6 +25,7 @@ public class MatchView {
 
     private TournamentView tournament;
 
+    private StadiumView stadium;
 
     public long getId() {
         return id;
@@ -79,5 +81,13 @@ public class MatchView {
 
     public void setTournament(TournamentView tournament) {
         this.tournament = tournament;
+    }
+
+    public StadiumView getStadium() {
+        return stadium;
+    }
+
+    public void setStadium(StadiumView stadium) {
+        this.stadium = stadium;
     }
 }

@@ -35,12 +35,6 @@ public class Stadium{
 
     @Column(name = "capacity")
     private int capacity;
-    @NotEmpty
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinTable(name = "fc_match_stadium",
-            joinColumns = { @JoinColumn(name = "id_stadium") },
-            inverseJoinColumns = { @JoinColumn(name = "id_match") })
-    private Set<Match> match = new HashSet<>();
 
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
@@ -71,14 +65,6 @@ public class Stadium{
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
-    }
-
-    public Set<Match> getMatch() {
-        return match;
-    }
-
-    public void setMatch(Set<Match> match) {
-        this.match = match;
     }
 
     public Set<Tournament> getTournaments() {

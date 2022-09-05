@@ -1,12 +1,16 @@
 package com.example.football.core.match;
 
+import com.example.football.core.match.annotations.MatchValidation;
+import com.example.football.core.stadium.Stadium;
 import com.example.football.core.team.Team;
 import com.example.football.core.tournament.Tournament;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
-
+@MatchValidation
 @Entity
 @Table(name = "fc_match")
 public class Match {
@@ -27,12 +31,14 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fc_match_id_seq")
     private long id;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "id_owners")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_owners", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Team teamOwner;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "id_guests")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_guests", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Team teamGuest;
 
     @Column(name = "score_owners")
@@ -44,8 +50,13 @@ public class Match {
     @Column(name = "match_date")
     private Date matchDate;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "id_tournament")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name ="id_stadium", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Stadium stadium;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_tournament", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Tournament tournament;
 
     public long getId(){return id;}
@@ -75,4 +86,12 @@ public class Match {
     public Tournament getTournament(){return tournament;}
 
     public void setTournament(Tournament tournament){this.tournament = tournament;}
+
+    public Stadium getStadium() {
+        return stadium;
+    }
+
+    public void setStadium(Stadium stadium) {
+        this.stadium = stadium;
+    }
 }

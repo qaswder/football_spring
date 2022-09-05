@@ -4,6 +4,8 @@ import com.example.football.core.match.converter.MatchToMatchViewConverter;
 import com.example.football.core.match.web.MatchView;
 import com.example.football.core.match.web.MatchBaseReq;
 import com.example.football.core.match.web.MatchLastReq;
+import com.example.football.core.stadium.Stadium;
+import com.example.football.core.stadium.StadiumRepo;
 import com.example.football.core.team.TeamRepo;
 import com.example.football.core.tournament.TournamentRepo;
 import com.example.football.error.EntityNotFoundException;
@@ -24,17 +26,20 @@ public class MatchService {
     private final MatchToMatchViewConverter matchToMatchViewConverter;
     private final TeamRepo teamRepo;
     private final TournamentRepo tournamentRepo;
+    private  final StadiumRepo stadiumRepo;
     private final MessageUtil messageUtil;
 
     public MatchService(MatchRepo matchRepo,
                         MatchToMatchViewConverter matchToMatchViewConverter,
                         TeamRepo teamRepo,
                         TournamentRepo tournamentRepo,
+                        StadiumRepo stadiumRepo,
                         MessageUtil messageUtil) {
         this.matchRepo = matchRepo;
         this.matchToMatchViewConverter = matchToMatchViewConverter;
         this.teamRepo = teamRepo;
         this.tournamentRepo = tournamentRepo;
+        this.stadiumRepo = stadiumRepo;
         this.messageUtil = messageUtil;
     }
 
@@ -91,6 +96,7 @@ public class MatchService {
         match.setScoreOwners(req.getScoreOwners());
         match.setScoreGuests(req.getScoreGuests());
         match.setTournament(tournamentRepo.getOne(req.getTournamentId()));
+        match.setStadium(stadiumRepo.getOne(req.getStadiumId()));
         match.setOwner(teamRepo.getOne(req.getTeamOwnerId()));
         match.setGuest(teamRepo.getOne(req.getTeamGuestId()));
         return match;

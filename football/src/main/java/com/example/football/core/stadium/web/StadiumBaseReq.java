@@ -14,7 +14,6 @@ public class StadiumBaseReq extends BaseRequest {
     private int capacity;
     private List<@Valid Id> tournaments;
 
-    private List<@Valid Id> matchId;
 
     public String getName() {
         return name;
@@ -40,11 +39,4 @@ public class StadiumBaseReq extends BaseRequest {
         this.tournaments = tournaments;
     }
 
-    public List<Id> getMatch() {
-        return matchId;
-    }
-
-    public void setMatch(List<Id> matchId) {
-        this.matchId = matchId;
-    }
 }

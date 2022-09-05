@@ -1,8 +1,5 @@
 package com.example.football.core.stadium.converter;
 
-import com.example.football.core.match.Match;
-import com.example.football.core.match.converter.MatchToMatchViewConverter;
-import com.example.football.core.match.web.MatchView;
 import com.example.football.core.stadium.Stadium;
 import com.example.football.core.stadium.web.StadiumView;
 import com.example.football.core.tournament.Tournament;
@@ -18,13 +15,10 @@ import java.util.Set;
 public class StadiumToStadiumViewConverter implements Converter<Stadium, StadiumView> {
 
     private final TournamentToTournamentViewConverter tournamentToTournamentViewConverter;
-    private final MatchToMatchViewConverter matchToMatchViewConverter;
 
-    public StadiumToStadiumViewConverter(TournamentToTournamentViewConverter tournamentToTournamentViewConverter,
-                                         MatchToMatchViewConverter matchToMatchViewConverter){
+    public StadiumToStadiumViewConverter(TournamentToTournamentViewConverter tournamentToTournamentViewConverter){
 
         this.tournamentToTournamentViewConverter = tournamentToTournamentViewConverter;
-        this.matchToMatchViewConverter = matchToMatchViewConverter;
     }
     @Override
     public StadiumView convert(@NonNull Stadium stadium) {
@@ -32,12 +26,6 @@ public class StadiumToStadiumViewConverter implements Converter<Stadium, Stadium
         view.setId(stadium.getId());
         view.setName(stadium.getName());
         view.setCapacity(stadium.getCapacity());
-
-        Set<MatchView> matchViews = new HashSet<>();
-        Set<Match> matches= stadium.getMatch();
-        matches.forEach(match -> matchViews.add(matchToMatchViewConverter.convert(match)));
-        view.setMatch(matchViews);
-
         Set<TournamentView> views = new HashSet<>();
         Set<Tournament> tournaments= stadium.getTournaments();
         tournaments.forEach(tournament -> views.add(tournamentToTournamentViewConverter.convert(tournament)));

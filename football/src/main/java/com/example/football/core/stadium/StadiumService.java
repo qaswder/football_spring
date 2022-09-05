@@ -29,18 +29,15 @@ public class StadiumService {
     private StadiumRepo stadiumRepo;
     private StadiumToStadiumViewConverter stadiumToStadiumViewConverter;
     private TournamentRepo tournamentRepo;
-    private MatchRepo matchRepo;
     private MessageUtil messageUtil;
 
     public StadiumService(StadiumRepo stadiumRepo,
                           StadiumToStadiumViewConverter stadiumToStadiumViewConverter,
                           TournamentRepo tournamentRepo,
-                          MatchRepo matchRepo,
                           MessageUtil messageUtil){
         this.stadiumRepo = stadiumRepo;
         this.stadiumToStadiumViewConverter = stadiumToStadiumViewConverter;
         this.tournamentRepo = tournamentRepo;
-        this.matchRepo = matchRepo;
         this.messageUtil = messageUtil;
     }
 
@@ -89,14 +86,6 @@ public class StadiumService {
     public Stadium prepare(Stadium stadium, StadiumBaseReq req){
         stadium.setName(req.getName());
         stadium.setCapacity(req.getCapacity());
-
-        List<Match> matchList = matchRepo.findAllById(req.getMatch()
-                .stream()
-                .map(BaseRequest.Id::getId)
-                .collect(Collectors.toSet()));
-        Set<Match> matches = new HashSet<>(matchList);
-        stadium.setMatch(matches);
-
         List<Tournament> tournamentList = tournamentRepo.findAllById(req.getTournaments()
                 .stream()
                 .map(BaseRequest.Id::getId)
