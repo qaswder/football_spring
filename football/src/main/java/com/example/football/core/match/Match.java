@@ -10,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
-@MatchValidation
+//@MatchValidation
 @Entity
 @Table(name = "fc_match")
 public class Match {

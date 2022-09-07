@@ -1,7 +1,5 @@
 package com.example.football.core.stadium;
 
-import com.example.football.core.match.Match;
-import com.example.football.core.stadium.annotations.StadiumValidation;
 import com.example.football.core.tournament.Tournament;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Set;
-@StadiumValidation
+
 @Entity
 @Table(name = "fc_stadium")
 public class Stadium{
